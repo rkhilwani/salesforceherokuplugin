@@ -21,7 +21,7 @@ pool.connect(function(err, client) {
 
   
   client
-    .query('SELECT AxtriaSalesIQTM__Client_Position_Code__c FROM AxtriaSalesIQTM__Position__c;')
+    .query('SELECT AxtriaSalesIQTM__Client_Position_Code__c FROM salesforceorg2.AxtriaSalesIQTM__Position__c;')
     .on('row', function(row) {
       console.log(JSON.stringify(row));
     });
