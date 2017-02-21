@@ -15,19 +15,18 @@ var config = {
 };
 var pool = new pg.Pool(config);
 app.get("/", function(req, res){
-pool.connect(function(err, client,done) {
+pool.connect(function(err, client) {
   if (err) throw err;
   console.log('Connected to postgres! Getting schemas...');
 
-  client.query('SELECT AxtriaSalesIQTM__Client_Position_Code__c FROM AxtriaSalesIQTM__Position__c',function(err,result))
-    done(err);
-	if(err)
-	{
-		return console.error('error running query', err);
-	}
-	
-      res.send(result);
+  
+  client
+    .query('SELECT AxtriaSalesIQTM__Client_Position_Code__c FROM AxtriaSalesIQTM__Position__c;')
+    .on('row', function(row) {
+      console.log(JSON.stringify(row));
     });
+  
+});
 });
 
 app.listen(app.get('port'), function() {
