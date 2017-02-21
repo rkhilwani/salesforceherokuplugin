@@ -10,9 +10,9 @@ pg.connect(process.env.DATABASE_URL, function(err, client) {
   console.log('Connected to postgres! Getting schemas...');
 
   client
-    .query('SELECT table_schema,table_name FROM information_schema.tables;')
+    .query('SELECT AxtriaSalesIQTM__Client_Position_Code__c FROM AxtriaSalesIQTM__Position__c;')
     .on('row', function(row) {
-      console.log(JSON.stringify(row));
+      res.JSON(row);
     });
 });
 });
