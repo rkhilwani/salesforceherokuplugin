@@ -42,10 +42,10 @@ pool.connect(function(err, client) {
 	console.log(teaminsta);
   
   client
-    .query('SELECT AxtriaSalesIQTM__Client_Position_Code__c FROM salesforceorg2.AxtriaSalesIQTM__Position__c limit 1;')
+    .query('SELECT salesforceorg2.Team_Instance_Account_PopulateV2(param);')
     .on('row', function(row) {
       console.log(JSON.stringify(row));
-	  res.json(row);
+	  res.json('Successfully Populated');
     });
   console.log('nishant');
 });
