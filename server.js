@@ -43,7 +43,7 @@ pool.connect(function(err, client) {
   
   client
     .query('SELECT salesforceorg2.Team_Instance_Account_PopulateV2(param)')
-    
+    res.send('Poulupation Completed');
   console.log('Population completed');
 });
 });
