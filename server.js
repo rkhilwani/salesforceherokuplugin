@@ -33,7 +33,7 @@ app.get("/teaminst", function(req, res){
 pool.connect(function(err, client) {
   if (err) throw err;
   console.log('Connected to postgres! Getting schemas...');
-  var param=req.params.id;
+  var param=req.body.teaminst;
 	console.log(param);
   
   client
