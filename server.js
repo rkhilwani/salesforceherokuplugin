@@ -29,7 +29,7 @@ pool.connect(function(err, client) {
   console.log('nishant');
 });
 });
-app.get("/:id", function(req, res){
+app.get("/teaminst", function(req, res){
 pool.connect(function(err, client) {
   if (err) throw err;
   console.log('Connected to postgres! Getting schemas...');
