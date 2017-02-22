@@ -1,5 +1,8 @@
 var express=require('express');
 var app=express();
+var bodyParser = require('body-parser');
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true }));
 
 var pg = require('pg');
 app.set('port', (process.env.PORT || 5000));
@@ -34,7 +37,9 @@ pool.connect(function(err, client) {
   if (err) throw err;
   console.log('Connected to postgres! Getting schemas...');
   var param=req.params.id;
+  var teaminsta=req.body.teaminst;
 	console.log(param);
+	console.log(teaminsta);
   
   client
     .query('SELECT AxtriaSalesIQTM__Client_Position_Code__c FROM salesforceorg2.AxtriaSalesIQTM__Position__c limit 1;')
