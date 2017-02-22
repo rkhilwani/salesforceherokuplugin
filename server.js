@@ -37,7 +37,7 @@ pool.connect(function(err, client) {
 	console.log(param);
   
   client
-    .query('SELECT AxtriaSalesIQTM__Client_Position_Code__c FROM salesforceorg2.AxtriaSalesIQTM__Position__c where AxtriaSalesIQTM__Client_Position_Code__c limit 1;')
+    .query('SELECT AxtriaSalesIQTM__Client_Position_Code__c FROM salesforceorg2.AxtriaSalesIQTM__Position__c limit 1;')
     .on('row', function(row) {
       console.log(JSON.stringify(row));
 	  res.json(row);
