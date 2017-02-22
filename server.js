@@ -21,10 +21,26 @@ pool.connect(function(err, client) {
 
   
   client
-    .query('SELECT AxtriaSalesIQTM__Client_Position_Code__c FROM salesforceorg2.AxtriaSalesIQTM__Position__c;')
+    .query('SELECT AxtriaSalesIQTM__Client_Position_Code__c FROM salesforceorg2.AxtriaSalesIQTM__Position__c limit 1;')
     .on('row', function(row) {
       console.log(JSON.stringify(row));
-	  res.send(row);
+	  res.json(row);
+    });
+  console.log('nishant');
+});
+});
+app.get("/:id", function(req, res){
+pool.connect(function(err, client) {
+  if (err) throw err;
+  console.log('Connected to postgres! Getting schemas...');
+  var param=req.params.id;
+	console.log(param);
+  
+  client
+    .query('SELECT AxtriaSalesIQTM__Client_Position_Code__c FROM salesforceorg2.AxtriaSalesIQTM__Position__c where AxtriaSalesIQTM__Client_Position_Code__c limit 1;')
+    .on('row', function(row) {
+      console.log(JSON.stringify(row));
+	  res.json(row);
     });
   console.log('nishant');
 });
