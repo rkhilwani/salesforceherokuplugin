@@ -42,8 +42,8 @@ pool.connect(function(err, client) {
 	console.log(teaminsta);
   
   client
-    .query("SELECT salesforceorg2.Team_Instance_Account_PopulateV2('"+param+"')");
-    res.send('Poulupation Completed');
+    .query("SELECT salesforceorg2.Team_Instance_Account_PopulateV2(param)");
+    res.send('Population Completed');
   console.log('Population completed');
 });
 });
