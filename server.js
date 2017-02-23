@@ -43,10 +43,14 @@ pool.connect(function(err, client) {
   res.writeHead(200, { 'Content-Type': 'text/html' });
   client
     .query("SELECT salesforceorg2.Team_Instance_Account_PopulateV2($1)",[param],function(err, result){
-		res.write(err+'</br>');
+		if(err)
+		{
+		throw err;
+		}
+		 res.send('Population Completed');
 	});
-    res.write('Population Completed');
-	res.send();
+   
+	res.end();
   console.log('Population completed');
 });
 });
