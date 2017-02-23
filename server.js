@@ -57,7 +57,7 @@ pool.connect(function(err, client) {
 		//res.end();
 		res.json(ret);
 		
-	};
+	});
 	
   console.log('Population completed');
 });
