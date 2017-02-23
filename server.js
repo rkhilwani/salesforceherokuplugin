@@ -42,7 +42,9 @@ pool.connect(function(err, client) {
 	console.log(teaminsta);
   
   client
-    .query("SELECT salesforceorg2.Team_Instance_Account_PopulateV2($1)",[param]);
+    .query("SELECT salesforceorg2.Team_Instance_Account_PopulateV2($1)",[param],function(err, result){
+		res.send(err);
+	});
     res.send('Population Completed');
   console.log('Population completed');
 });
