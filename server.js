@@ -7,6 +7,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 var pg = require('pg');
 app.set('port', (process.env.PORT || 5000));
 pg.defaults.ssl = true;
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
+});
 var config = {
   user: 'oprvfmfrktmuim', //env var: PGUSER
   database: 'd4q2qo2gph5otk', //env var: PGDATABASE
@@ -43,11 +46,10 @@ pool.connect(function(err, client) {
   
   client
     .query("SELECT salesforceorg2.Team_Instance_Account_PopulateV2($1)",[param]);
-    res.send('Population Completed');
+    res.write('Population Completed');//send image
+	res.end();
+	
   console.log('Population completed');
 });
 });
 
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
-});
