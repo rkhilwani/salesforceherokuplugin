@@ -37,7 +37,10 @@ pool.connect(function(err, client) {
 });
 app.post("/:id", function(req, res){
 pool.connect(function(err, client) {
-  if (err) throw err;
+  if (err){
+  console.log(err);
+  throw err;
+  }
   console.log('Connected to postgres! Getting schemas...');
   var param=req.params.id;
   var teaminsta=req.body.teaminst;
