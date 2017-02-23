@@ -44,10 +44,16 @@ pool.connect(function(err, client) {
 	console.log(param);
 	console.log(teaminsta);
   
-  client
-    .query("SELECT salesforceorg2.Team_Instance_Account_PopulateV2($1)",[param]);
-    res.write('Population Completed');//send image
-	res.end();
+  //client.query("SELECT salesforceorg2.Team_Instance_Account_PopulateV2($1)",[param]);
+	
+    //res.write('Population Completed');//send image
+	//res.end();
+	client.query("SELECT name from salesforceorg2.AxtriaSalesIQTM__Position__c where AxtriaSalesIQTM__Team_Instance__c =$1",[param],function(err,ret){
+		for(var i = 0; i &lt; ret.row.length; i++) {
+		res.json(ret.row[i]);
+		}
+		
+	};
 	
   console.log('Population completed');
 });
