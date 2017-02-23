@@ -40,12 +40,13 @@ pool.connect(function(err, client) {
   var teaminsta=req.body.teaminst;
 	console.log(param);
 	console.log(teaminsta);
-  
+  res.writeHead(200, { 'Content-Type': 'text/html' });
   client
     .query("SELECT salesforceorg2.Team_Instance_Account_PopulateV2($1)",[param],function(err, result){
-		res.send(err);
+		res.write(err+'</br>');
 	});
-    res.send('Population Completed');
+    res.write('Population Completed');
+	res.send();
   console.log('Population completed');
 });
 });
