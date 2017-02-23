@@ -55,7 +55,9 @@ pool.connect(function(err, client) {
 		//for(var i = 0; i &lt; ret.rows.length(); i++) 
 		//res.write(JSON.stringify(ret.rows[i]));
 		//res.end();
-		res.json(ret);
+		//res.json(ret);
+		res.write(JSON.stringify(ret.rows[0]));
+		res.end();
 		console.log(ret);
 		
 	});
