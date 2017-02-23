@@ -51,14 +51,15 @@ pool.connect(function(err, client) {
 	
     //res.write('Population Completed');//send image
 	//res.end();
-	 client.query("SELECT name from salesforceorg2.AxtriaSalesIQTM__Position__c where AxtriaSalesIQTM__Team_Instance__c =$1",[param],function(err,ret){
-		//for(var i = 0; i &lt; ret.rows.length(); i++) 
+	var resp = client.query("SELECT name from salesforceorg2.AxtriaSalesIQTM__Position__c where AxtriaSalesIQTM__Team_Instance__c =$1",[param]);
+		resp.on('row',function(row){
+			//for(var i = 0; i &lt; ret.rows.length(); i++) 
 		//res.write(JSON.stringify(ret.rows[i]));
 		//res.end();
 		//res.json(ret);
-		res.send(JSON.stringify(ret));
-		
-		console.log(ret);
+		res.write(row.name));
+		res.end();
+		console.log(row.name);
 		
 	});
 	
