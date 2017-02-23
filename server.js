@@ -36,7 +36,7 @@ app.post("/:id", function(req, res){
 pool.connect(function(err, client) {
   if (err) 
   {
-	  console.log(err);
+	  throw err;
   }
   console.log('Connected to postgres! Getting schemas...');
   var param=req.params.id;
@@ -48,12 +48,12 @@ pool.connect(function(err, client) {
     .query("SELECT salesforceorg2.Team_Instance_Account_PopulateV2($1)",[param],function(err, result){
 		if(err)
 		{
-		console.log(err);
+		throw err;
 		}
 		 res.send('Population Completed');
 	});
    
-	
+	res.end();
   console.log('Population completed');
 });
 });
