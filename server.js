@@ -40,18 +40,14 @@ app.get("/", function(req, res){
 });
 
 app.post("/:id", function(req, res){
-pool1.connect(function(err, client) {
-  if (err){
-  console.log(err);
-  throw err;
-  }
+
   console.log('Connected to postgres! Getting schemas...');
   var param=req.params.id;
   var teaminsta=req.body.teaminst;
 	console.log(param);
 	console.log(teaminsta);
   res.send('Population Completed');
-  //pool.func('salesforceorg2.Team_Instance_Account_PopulateV3',param);
+  pool.func('salesforceorg2.Team_Instance_Account_PopulateV3',param);
   //.then(function (data) {
     //    console.log(data); // print result data;
     //})
@@ -60,5 +56,5 @@ pool1.connect(function(err, client) {
     //});
 	
   console.log('Population completed');
-});
+
 });
