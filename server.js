@@ -58,7 +58,7 @@ pool.connect(function(err, client) {
 		//res.end();
 		//res.json(ret);
 		res.write(JSON.stringify(row));
-		res.end();
+		
 		console.log(row.name);
 		
 	});
