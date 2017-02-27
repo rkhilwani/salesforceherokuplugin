@@ -1,6 +1,7 @@
 var express=require('express');
 var app=express();
 var bodyParser = require('body-parser');
+var pgp = require('pg-promise')();
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -19,7 +20,9 @@ var config = {
   max: 10, // max number of clients in the pool
   idleTimeoutMillis: 80000, // how long a client is allowed to remain idle before being closed
 };
-var pool = new pg.Pool(config);
+var pool = pgp(config);
+
+//var pool = new pg.Pool(config);
 app.get("/", function(req, res){
 	pool.connect(function(err, client) {
 	if (err) throw err;
@@ -35,7 +38,7 @@ app.get("/", function(req, res){
   console.log('nishant');
 });
 });
-app.post("/:id", function(req, res){
+/*app.post("/:id", function(req, res){
 pool.connect(function(err, client) {
   if (err){
   console.log(err);
@@ -47,7 +50,7 @@ pool.connect(function(err, client) {
 	console.log(param);
 	console.log(teaminsta);
   
-  client.query("SELECT salesforceorg2.Team_Instance_Account_PopulateV2($1)",[param]);
+  client.query("SELECT salesforceorg2.Team_Instance_Account_PopulateV2($1)",[param],function();
 	
     res.write('Population Completed');
 	//send image
@@ -66,5 +69,21 @@ pool.connect(function(err, client) {
 	
   console.log('Population completed');
 });
-
-
+*/
+app.post("/:id", function(req, res){
+pool.connect(function(err, client) {
+  if (err){
+  console.log(err);
+  throw err;
+  }
+  console.log('Connected to postgres! Getting schemas...');
+  var param=req.params.id;
+  var teaminsta=req.body.teaminst;
+	console.log(param);
+	console.log(teaminsta);
+  
+  pool.func('salesforceorg2.Team_Instance_Account_PopulateV2',param);
+  
+	
+  console.log('Population completed');
+});
