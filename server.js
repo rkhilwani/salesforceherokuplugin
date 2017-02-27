@@ -38,38 +38,7 @@ app.get("/", function(req, res){
   console.log('nishant');
 });
 });
-/*app.post("/:id", function(req, res){
-pool.connect(function(err, client) {
-  if (err){
-  console.log(err);
-  throw err;
-  }
-  console.log('Connected to postgres! Getting schemas...');
-  var param=req.params.id;
-  var teaminsta=req.body.teaminst;
-	console.log(param);
-	console.log(teaminsta);
-  
-  client.query("SELECT salesforceorg2.Team_Instance_Account_PopulateV2($1)",[param],function();
-	
-    res.write('Population Completed');
-	//send image
-	res.end();
-	//var resp = client.query("SELECT Name from salesforceorg2.AxtriaSalesIQTM__Team_Instance_Account__c where AxtriaSalesIQTM__Team_Instance__c =$1 limit 1",[param]);
-		//resp.on('row',function(row){
-			//for(var i = 0; i &lt; ret.rows.length(); i++) 
-		//res.write(JSON.stringify(ret.rows[i]));
-		//res.end();
-		//res.json(ret);
-	//	res.send(JSON.stringify(row));
-		
-		
-		
-	});
-	
-  console.log('Population completed');
-});
-*/
+
 app.post("/:id", function(req, res){
 pool.connect(function(err, client) {
   if (err){
