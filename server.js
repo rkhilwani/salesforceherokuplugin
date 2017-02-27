@@ -21,9 +21,9 @@ var config = {
 };
 var pool = new pg.Pool(config);
 app.get("/", function(req, res){
-pool.connect(function(err, client) {
-  if (err) throw err;
-  console.log('Connected to postgres! Getting schemas...');
+	pool.connect(function(err, client) {
+	if (err) throw err;
+	console.log('Connected to postgres! Getting schemas...');
 
   
   client
@@ -49,21 +49,22 @@ pool.connect(function(err, client) {
   
   client.query("SELECT salesforceorg2.Team_Instance_Account_PopulateV2($1)",[param]);
 	
-    res.write('Population Completed');//send image
+    res.write('Population Completed');
+	//send image
 	res.end();
-	/*var resp = client.query("SELECT Name from salesforceorg2.AxtriaSalesIQTM__Team_Instance_Account__c where AxtriaSalesIQTM__Team_Instance__c =$1 limit 1",[param]);
-		resp.on('row',function(row){
+	//var resp = client.query("SELECT Name from salesforceorg2.AxtriaSalesIQTM__Team_Instance_Account__c where AxtriaSalesIQTM__Team_Instance__c =$1 limit 1",[param]);
+		//resp.on('row',function(row){
 			//for(var i = 0; i &lt; ret.rows.length(); i++) 
 		//res.write(JSON.stringify(ret.rows[i]));
 		//res.end();
 		//res.json(ret);
-		res.send(JSON.stringify(row));
+	//	res.send(JSON.stringify(row));
 		
-		*/
+		
 		
 	});
 	
   console.log('Population completed');
 });
-});
+
 
