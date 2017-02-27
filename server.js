@@ -17,7 +17,7 @@ var config = {
   host: 'ec2-54-204-32-145.compute-1.amazonaws.com', // Server hosting the postgres database
   port: 5432, //env var: PGPORT
   max: 10, // max number of clients in the pool
-  idleTimeoutMillis: 60000, // how long a client is allowed to remain idle before being closed
+  idleTimeoutMillis: 80000, // how long a client is allowed to remain idle before being closed
 };
 var pool = new pg.Pool(config);
 app.get("/", function(req, res){
@@ -51,7 +51,7 @@ pool.connect(function(err, client) {
 	
     res.write('Population Completed');
 	//send image
-	res.end();
+	
 	//var resp = client.query("SELECT Name from salesforceorg2.AxtriaSalesIQTM__Team_Instance_Account__c where AxtriaSalesIQTM__Team_Instance__c =$1 limit 1",[param]);
 		//resp.on('row',function(row){
 			//for(var i = 0; i &lt; ret.rows.length(); i++) 
