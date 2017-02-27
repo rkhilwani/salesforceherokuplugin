@@ -50,7 +50,7 @@ pool.connect(function(err, client) {
   var teaminsta=req.body.teaminst;
 	console.log(param);
 	console.log(teaminsta);
-  
+  res.send('Population Completed');
   //pool.func('salesforceorg2.Team_Instance_Account_PopulateV3',param);
   //.then(function (data) {
     //    console.log(data); // print result data;
