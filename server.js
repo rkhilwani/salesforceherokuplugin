@@ -18,9 +18,9 @@ var config = {
   host: 'ec2-54-204-32-145.compute-1.amazonaws.com', // Server hosting the postgres database
   port: 5432, //env var: PGPORT
   max: 10, // max number of clients in the pool
-  idleTimeoutMillis: 80000, // how long a client is allowed to remain idle before being closed
+  //idleTimeoutMillis: 80000, // how long a client is allowed to remain idle before being closed
 };
-var pool = pgp('postgres://oprvfmfrktmuim:9db871afbdbf2f8bd1339d53de02359022e7ef5fb58392230d3a99cf32b63d48@ec2-54-204-32-145.compute-1.amazonaws.com:5432/d4q2qo2gph5otk');
+var pool1 = pgp('postgres://oprvfmfrktmuim:9db871afbdbf2f8bd1339d53de02359022e7ef5fb58392230d3a99cf32b63d48@ec2-54-204-32-145.compute-1.amazonaws.com:5432/d4q2qo2gph5otk');
 
 //var pool = new pg.Pool(config);
 app.get("/", function(req, res){
@@ -40,7 +40,7 @@ app.get("/", function(req, res){
 });
 
 app.post("/:id", function(req, res){
-pool.connect(function(err, client) {
+pool1.connect(function(err, client) {
   if (err){
   console.log(err);
   throw err;
