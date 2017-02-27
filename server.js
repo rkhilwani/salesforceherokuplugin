@@ -1,7 +1,7 @@
 var express=require('express');
 var app=express();
 var bodyParser = require('body-parser');
-var pgp = require('pg-promise');
+var pgp = require('pg-promise')();
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 
