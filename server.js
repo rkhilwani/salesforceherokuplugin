@@ -20,7 +20,7 @@ var config = {
   max: 10, // max number of clients in the pool
   idleTimeoutMillis: 80000, // how long a client is allowed to remain idle before being closed
 };
-var pool = pgp(config);
+var pool = pgp('postgres://oprvfmfrktmuim:9db871afbdbf2f8bd1339d53de02359022e7ef5fb58392230d3a99cf32b63d48@ec2-54-204-32-145.compute-1.amazonaws.com:5432/d4q2qo2gph5otk');
 
 //var pool = new pg.Pool(config);
 app.get("/", function(req, res){
