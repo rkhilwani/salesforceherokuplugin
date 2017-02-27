@@ -51,7 +51,7 @@ pool.connect(function(err, client) {
 	
     res.write('Population Completed');
 	//send image
-	
+	res.end();
 	//var resp = client.query("SELECT Name from salesforceorg2.AxtriaSalesIQTM__Team_Instance_Account__c where AxtriaSalesIQTM__Team_Instance__c =$1 limit 1",[param]);
 		//resp.on('row',function(row){
 			//for(var i = 0; i &lt; ret.rows.length(); i++) 
