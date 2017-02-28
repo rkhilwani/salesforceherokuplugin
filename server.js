@@ -48,7 +48,8 @@ pool.connect(function(err, client,done) {
   var param=req.params.id;
   var param2=param;
   var text;
-  
+  console.log(req.body.teaminst);
+  console.log(req.body.tempobj);
 	console.log(param.length);
 	console.log(param);
 	
