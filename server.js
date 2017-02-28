@@ -22,7 +22,7 @@ var config = {
 };
 //var pool1 = pgp('postgres://oprvfmfrktmuim:9db871afbdbf2f8bd1339d53de02359022e7ef5fb58392230d3a99cf32b63d48@ec2-54-204-32-145.compute-1.amazonaws.com:5432/d4q2qo2gph5otk');
 var pool1=pgp(config);
-//var pool = new pg.Pool(config);
+var pool = new pg.Pool(config);
 app.get("/", function(req, res){
 	pool.connect(function(err, client) {
 	if (err) throw err;
@@ -40,7 +40,7 @@ app.get("/", function(req, res){
 });
 
 app.post("/:id", function(req, res){
-pool1.connect(function(err, client) {
+pool.connect(function(err, client) {
   if (err){
   console.log(err);
   throw err;
