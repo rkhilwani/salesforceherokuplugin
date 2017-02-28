@@ -47,13 +47,20 @@ app.post("/:id", function(req, res){
 	console.log(param);
 	console.log(teaminsta);
   res.send('Population Completed');
-  pool1.func('salesforceorg2.Team_Instance_Account_PopulateV3',param);
-  //.then(function (data) {
-    //    console.log(data); // print result data;
+ // pool1.func('salesforceorg2.Team_Instance_Account_PopulateV3',param)
+	//.then(function (data) {
+      //  console.log(data); // print result data;
     //})
     //.catch(function (error) {
       //  console.log(error); // print error;
     //});
+	db.any("SELECT Name from salesforceorg2.AxtriaSalesIQTM__Team_Instance_Account__c where AxtriaSalesIQTM__Team_Instance__c =$1 limit 1", param)
+    .then(function (data) {
+        res.send(data);
+    })
+    .catch(function (error) {
+        // error;
+    });
 	
   console.log('Population completed');
 
