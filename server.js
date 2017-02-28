@@ -47,8 +47,14 @@ pool.connect(function(err, client,done) {
   console.log('Connected to postgres! Getting schemas...');
   var param=req.params.id;
   var param2=param;
+  var text;
   var teaminsta=req.body.teaminst;
 	console.log(param.length);
+	for (i = 0; i < param.length; i++) { 
+    console.log(param[i]);
+	text += param[i] + "<br>";
+}
+console.log(text);
 	console.log(teaminsta);
   
   client.query("SELECT salesforceorg2.Team_Instance_Account_PopulateV3($1)",[param2],function(err,result){
