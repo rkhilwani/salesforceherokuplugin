@@ -50,9 +50,9 @@ pool.connect(function(err, client,done) {
   var text;
   var teaminsta=req.body.teaminst;
 	console.log(param.length);
-	for (i = 0; i < param.length; i++) { 
+	for (i = 1; i < param.length; i++) { 
     console.log(param[i]);
-	text += param[i] + "<br>";
+	text += param[i];
 }
 console.log(text);
 	console.log(teaminsta);
