@@ -52,13 +52,11 @@ pool.connect(function(err, client,done) {
 	console.log(param.length);
 	console.log(param);
 	
-	for (i = 0; i < param.length; i++) { 
-    text += param[i];
-}
-console.log(text);
+
+
 	
   
-  client.query("SELECT salesforceorg2.Team_Instance_Account_PopulateV3($1)",[abcab],function(err,result){
+  client.query("SELECT salesforceorg2.Team_Instance_Account_PopulateV3($1)",[param],function(err,result){
 	  
 			done(); 
            if(err){
