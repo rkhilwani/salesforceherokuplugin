@@ -48,10 +48,11 @@ pool.connect(function(err, client) {
   console.log('Connected to postgres! Getting schemas...');
   var param=req.params.id;
   var teaminsta=req.body.teaminst;
+  var finalparam=String(param);
 	console.log(param);
 	console.log(teaminsta);
   //res.send('Population Completed');
-	pool1.func('salesforceorg2.Team_Instance_Account_PopulateV3',param)
+	pool1.func('salesforceorg2.Team_Instance_Account_PopulateV3',finalparam)
 	.then(function (data) {
         console.log(data);
 			res.send('Population Completed');// print result data;
