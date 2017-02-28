@@ -55,7 +55,9 @@ pool.connect(function(err, client,done) {
   var bussinessRuleType=req.body.bussinessRuleType;
  // console.log(req.body.tempobj);
 	console.log(sfdcid);
+	console.log(sfdcid.length);
 	console.log(bussinessRuleType);
+	console.log(bussinessRuleType.length);
 	
 
 
