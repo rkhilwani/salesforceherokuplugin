@@ -48,7 +48,7 @@ pool.connect(function(err, client,done) {
   var param=req.params.id;
   var param2=param;
   var teaminsta=req.body.teaminst;
-	console.log(param);
+	console.log(param.length);
 	console.log(teaminsta);
   
   client.query("SELECT salesforceorg2.Team_Instance_Account_PopulateV3($1)",[param2],function(err,result){
