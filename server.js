@@ -41,7 +41,7 @@ app.get("/", function(req, res){
 app.post("/:id", function(req, res){
 pool.connect(function(err, client,done) {
   if (err){
-  console.log(err);
+  //console.log(err);
   throw err;
   }
   console.log('Connected to postgres! Getting schemas...');
@@ -50,7 +50,9 @@ pool.connect(function(err, client,done) {
   var text;
   
 	console.log(param.length);
-	for (i = 1; i < param.length; i++) { 
+	console.log(param);
+	
+	for (i = 0; i < param.length; i++) { 
     text += param[i];
 }
 console.log(text);
