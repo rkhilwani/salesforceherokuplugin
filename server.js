@@ -1,5 +1,6 @@
 var express=require('express');
 var app=express();
+var sleep = require('sleep');
 var bodyParser = require('body-parser');
 var pgp = require('pg-promise')();
 app.use(bodyParser.json()); // support json encoded bodies
@@ -61,7 +62,7 @@ pool.connect(function(err, client,done) {
 	
 
 
-	
+	sleep.sleep(5);
   
   client.query("select sfdcbusinessrule.BusinessRuleExecute($1,$2)",[sfdcid,bussinessRuleType],function(err,result){
 	  
