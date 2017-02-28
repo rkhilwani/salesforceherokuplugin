@@ -50,6 +50,7 @@ pool.connect(function(err, client,done) {
   //var param=req.params.id;
   //var param2=param;
   //var text;
+  console.log(req.body);
   var sfdcid=req.body.Business_Rule_Change_request_sfid;
   var bussinessRuleType=req.body.Business_rule_type;
  // console.log(req.body.tempobj);
