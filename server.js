@@ -51,13 +51,12 @@ pool.connect(function(err, client,done) {
   
 	console.log(param.length);
 	for (i = 1; i < param.length; i++) { 
-    console.log(param[i]);
-	text += param[i];
+    text += param[i];
 }
 console.log(text);
 	
   
-  client.query("SELECT salesforceorg2.Team_Instance_Account_PopulateV3($1)",[text],function(err,result){
+  client.query("SELECT salesforceorg2.Team_Instance_Account_PopulateV3($1)",[a0o41000001KsXRAA0],function(err,result){
 	  
 			done(); 
            if(err){
