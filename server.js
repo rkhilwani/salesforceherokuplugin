@@ -54,7 +54,7 @@ app.post("/:id", function(req, res){
     //.catch(function (error) {
       //  console.log(error); // print error;
     //});
-	db.any("SELECT Name from salesforceorg2.AxtriaSalesIQTM__Team_Instance_Account__c where AxtriaSalesIQTM__Team_Instance__c =$1 limit 1", param)
+	pool1.any("SELECT Name from salesforceorg2.AxtriaSalesIQTM__Team_Instance_Account__c where AxtriaSalesIQTM__Team_Instance__c =$1 limit 1", param)
     .then(function (data) {
         res.send(data);
     })
