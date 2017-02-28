@@ -50,12 +50,16 @@ pool.connect(function(err, client) {
   var teaminsta=req.body.teaminst;
 	console.log(param);
 	console.log(teaminsta);
-  
-  client.query("SELECT salesforceorg2.Team_Instance_Account_PopulateV3($1)",[param]);
+  ]
+  client.query("SELECT salesforceorg2.Team_Instance_Account_PopulateV3($1)",[param],function(err, result) {
+	  console.log(result);
+	  res.write('Population Completed');
+	  res.end();
+  });
 	
-    res.write('Population Completed');
+    //res.write('Population Completed');
 	//send image
-	res.end();
+	//res.end();
 	//var resp = client.query("SELECT Name from salesforceorg2.AxtriaSalesIQTM__Team_Instance_Account__c where AxtriaSalesIQTM__Team_Instance__c =$1 limit 1",[param]);
 		//resp.on('row',function(row){
 			//for(var i = 0; i &lt; ret.rows.length(); i++) 
