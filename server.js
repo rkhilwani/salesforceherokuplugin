@@ -52,7 +52,7 @@ pool.connect(function(err, client,done) {
   //var text;
   console.log(req.body);
   var sfdcid=req.body.Business_Rule_Change_request_sfid;
-  var bussinessRuleType=req.body.Business_rule_type;
+  var bussinessRuleType=req.body.bussinessRuleType;
  // console.log(req.body.tempobj);
 	console.log(sfdcid);
 	console.log(bussinessRuleType);
