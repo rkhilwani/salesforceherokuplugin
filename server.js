@@ -21,7 +21,7 @@ var config = {
   //idleTimeoutMillis: 80000, // how long a client is allowed to remain idle before being closed
 };
 //var pool1 = pgp('postgres://oprvfmfrktmuim:9db871afbdbf2f8bd1339d53de02359022e7ef5fb58392230d3a99cf32b63d48@ec2-54-204-32-145.compute-1.amazonaws.com:5432/d4q2qo2gph5otk');
-var pool1=pgp(config);
+//var pool1=pgp(config);
 var pool = new pg.Pool(config);
 app.get("/", function(req, res){
 	pool.connect(function(err, client) {
@@ -38,8 +38,47 @@ app.get("/", function(req, res){
   console.log('nishant');
 });
 });
-
 app.post("/:id", function(req, res){
+pool.connect(function(err, client,done) {
+  if (err){
+  console.log(err);
+  throw err;
+  }
+  console.log('Connected to postgres! Getting schemas...');
+  var param=req.params.id;
+  var teaminsta=req.body.teaminst;
+	console.log(param);
+	console.log(teaminsta);
+  
+  client.query("SELECT salesforceorg2.Team_Instance_Account_PopulateV2($1)",[123],function(err,result){
+	  
+			done(); 
+           if(err){
+               console.log(err);
+               res.status(400).send(err);
+           }
+           res.status(200).send(result.rows);
+	  
+  });
+	
+    //res.write('Population Completed');
+	//send image
+	//res.end();
+	//var resp = client.query("SELECT Name from salesforceorg2.AxtriaSalesIQTM__Team_Instance_Account__c where AxtriaSalesIQTM__Team_Instance__c =$1 limit 1",[param]);
+		//resp.on('row',function(row){
+			//for(var i = 0; i &lt; ret.rows.length(); i++) 
+		//res.write(JSON.stringify(ret.rows[i]));
+		//res.end();
+		//res.json(ret);
+	//	res.send(JSON.stringify(row));
+		
+		
+		
+	});
+	
+  console.log('Population completed');
+});
+/*app.post("/:id", function(req, res){
 pool.connect(function(err, client) {
   if (err){
   console.log(err);
@@ -52,7 +91,7 @@ pool.connect(function(err, client) {
 	console.log(param);
 	console.log(teaminsta);
   //res.send('Population Completed');
-	pool1.func('salesforceorg2.Team_Instance_Account_PopulateV3',[a0o41000001KsXR])
+	pool1.func('salesforceorg2.Team_Instance_Account_PopulateV3',abc)
 	.then(function (data) {
         console.log(data);
 			res.send('Population Completed');// print result data;
@@ -71,3 +110,4 @@ pool.connect(function(err, client) {
   console.log('Population completed');
 });
 });
+*/
