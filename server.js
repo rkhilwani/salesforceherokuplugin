@@ -62,7 +62,7 @@ pool.connect(function(err, client,done) {
 	
 
 
-	sleep.sleep(10);
+	//sleep.sleep(10);
   
   client.query("select sfdcbusinessrule.BusinessRuleExecute($1,$2)",[sfdcid,bussinessRuleType],function(err,result){
 	  
