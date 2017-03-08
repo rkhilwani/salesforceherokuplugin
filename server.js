@@ -102,7 +102,7 @@ pool.connect(function(err, client,done) {
 	
 
 
-	sleep.sleep(5);
+	
   
   client.query("select sfdcbusinessrule.delete_businessruleexecute($1,$2)",[sfdcid,bussinessRuleType],function(err,result){
 	  
