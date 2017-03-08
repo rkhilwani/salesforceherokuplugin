@@ -75,6 +75,12 @@ pool.connect(function(err, client,done) {
 	  
   });
 	
+	});
+	
+  console.log('Population completed');
+});	
+
+
 app.post("/delete", function(req, res){
 pool.connect(function(err, client,done) {
   if (err){
@@ -109,6 +115,10 @@ pool.connect(function(err, client,done) {
 	  
   });	
 	
+	});
+	
+  console.log('Population completed');
+});	
 	
 	
     //res.write('Population Completed');
@@ -123,11 +133,7 @@ pool.connect(function(err, client,done) {
 	//	res.send(JSON.stringify(row));
 		
 		
-		
-	});
 	
-  console.log('Population completed');
-});
 /*app.post("/:id", function(req, res){
 pool.connect(function(err, client) {
   if (err){
