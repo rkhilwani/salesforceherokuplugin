@@ -75,6 +75,42 @@ pool.connect(function(err, client,done) {
 	  
   });
 	
+app.post("/delete", function(req, res){
+pool.connect(function(err, client,done) {
+  if (err){
+  //console.log(err);
+  throw err;
+  }
+  console.log('Connected to postgres! Getting schemas...');
+  //var param=req.params.id;
+  //var param2=param;
+  //var text;
+  console.log(req.body);
+  var sfdcid=req.body.Business_Rule_Change_request_sfid;
+  var bussinessRuleType=req.body.bussinessRuleType;
+ // console.log(req.body.tempobj);
+	console.log(sfdcid);
+	console.log(sfdcid.length);
+	console.log(bussinessRuleType);
+	console.log(bussinessRuleType.length);
+	
+
+
+	sleep.sleep(5);
+  
+  client.query("select sfdcbusinessrule.delete_businessruleexecute($1,$2)",[sfdcid,bussinessRuleType],function(err,result){
+	  
+			done(); 
+           if(err){
+               console.log(err);
+               res.status(400).send(err);
+           }
+           res.status(200).send(result.rows);
+	  
+  });	
+	
+	
+	
     //res.write('Population Completed');
 	//send image
 	//res.end();
