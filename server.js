@@ -61,21 +61,28 @@ pool.connect(function(err, client,done) {
 	console.log(bussinessRuleType.length);
 	
 
-
+query.on('end', function() {
+                 console.log('close');
+                 // client.end(); -- not needed, client will return to the pool on drain
+                 });
 	
   
-  client.query("select sfdcbusinessrule.BusinessRuleExecute($1,$2)",[sfdcid,bussinessRuleType],function(err,result){
-	  
+  var query=client.query("select sfdcbusinessrule.BusinessRuleExecute($1,$2)",[sfdcid,bussinessRuleType],function(err,result){
+	  	
 			done(); 
            if(err){
                console.log(err);
                res.status(400).send(err);
            }
-           res.status(200).send(result.rows);
+	  client.end();
+           //res.status(200).send(result.rows);
 	  
-  });
-	
-	});
+  	});
+	query.on('end', function() {
+                 console.log('close');
+                 // client.end(); -- not needed, client will return to the pool on drain
+                 });
+});
 	
   console.log('Population completed');
 });	
