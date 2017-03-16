@@ -64,7 +64,7 @@ pool.connect(function(err,client,done) {
 
 
 	
-  
+  /*
   client.query("select sfdcbusinessrule.BusinessRuleExecute($1,$2)",[sfdcid,bussinessRuleType],function(err,result){
 	  	
 			done(); 
@@ -79,9 +79,16 @@ pool.connect(function(err,client,done) {
 	  
   	});
 	
-	
+*/
+	client.query("select sfdcbusinessrule.BusinessRuleExecute($1,$2)",[sfdcid,bussinessRuleType]);
+	done();
+	pool.end();
+	res.status(200).send('Connection Closed');
 });	
-
+pool.on('error', function (err, client) {
+ 
+  console.error('idle client error', err.message, err.stack)
+});
 	
   console.log('Population completed');
 });	
