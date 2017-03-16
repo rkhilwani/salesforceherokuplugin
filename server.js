@@ -44,10 +44,10 @@ app.get("/", function(req, res){
 */
 app.post("/", function(req, res){
 pool.connect(function(err,client,done) {
-  if (err){
+ /* if (err){
   //console.log(err);
   throw err;
-  }
+  }*/
   console.log('Connected to postgres! Getting schemas...');
   //var param=req.params.id;
   //var param2=param;
