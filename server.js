@@ -19,8 +19,8 @@ var config = {
   password: '35b5fd10b572744d4018dfc72c1856ba9a2118d5233bd7d521e4231ff7aea9bf', //env var: PGPASSWORD
   host: 'ec2-23-21-220-23.compute-1.amazonaws.com', // Server hosting the postgres database
   port: 5432, //env var: PGPORT
-  max: 5, // max number of clients in the pool
-  idleTimeoutMillis: 100000, // how long a client is allowed to remain idle before being closed
+  max: 10, // max number of clients in the pool
+ // idleTimeoutMillis: 100000, // how long a client is allowed to remain idle before being closed
 };
 //var pool1 = pgp('postgres://oprvfmfrktmuim:9db871afbdbf2f8bd1339d53de02359022e7ef5fb58392230d3a99cf32b63d48@ec2-54-204-32-145.compute-1.amazonaws.com:5432/d4q2qo2gph5otk');
 //var pool1=pgp(config);
@@ -75,21 +75,12 @@ pool.connect(function(err,client,done) {
                res.status(400).send(err);
            }
 	 
-           //res.status(200).send(result.rows);
+           res.status(200).send(result.rows);
 	  
   	});
 	
 });	
-/*	client.query("select sfdcbusinessrule.BusinessRuleExecute($1,$2)",[sfdcid,bussinessRuleType]);
-	//done(); 
-	   pool.end();
-	  res.status(200).send('Connection Terminated');
-	
-});
-pool.on('error', function (err, client) {
-  res.status(200).send('Error Occured');
-});
-*/
+
 	
   console.log('Population completed');
 });	
