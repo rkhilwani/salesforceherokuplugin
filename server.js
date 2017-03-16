@@ -66,7 +66,7 @@ pool.connect(function(err, client,done) {
   
   var query=client.query("select sfdcbusinessrule.BusinessRuleExecute($1,$2)",[sfdcid,bussinessRuleType],function(err,result){
 	  	
-			done(); 
+			//done(); 
            if(err){
                console.log(err);
                res.status(400).send(err);
