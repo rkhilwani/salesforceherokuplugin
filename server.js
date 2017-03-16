@@ -77,7 +77,7 @@ pool.connect(function(err, client,done) {
   	});
 	query.on('end', function() {
                  console.log('close');
-                 // client.end(); -- not needed, client will return to the pool on drain
+                  client.end(); 
                  });
 });
 	
