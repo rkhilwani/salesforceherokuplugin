@@ -64,7 +64,7 @@ pool.connect(function(err,client,done) {
 
 	
   
-  /*var query=client.query("select sfdcbusinessrule.BusinessRuleExecute($1,$2)",[sfdcid,bussinessRuleType],function(err,result){
+  var query=client.query("select sfdcbusinessrule.BusinessRuleExecute($1,$2)",[sfdcid,bussinessRuleType],function(err,result){
 	  	
 			done(); 
 	   pool.end();
@@ -77,11 +77,12 @@ pool.connect(function(err,client,done) {
            //res.status(200).send(result.rows);
 	  
   	});
-*/	
-	client.query("select sfdcbusinessrule.BusinessRuleExecute($1,$2)",[sfdcid,bussinessRuleType]);
+	
+	/*client.query("select sfdcbusinessrule.BusinessRuleExecute($1,$2)",[sfdcid,bussinessRuleType]);
 	done(); 
-	   pool.end();
-	  res.status(200).send('Connection Closed');
+	   //pool.end();
+	  res.status(200).send('Connection Terminated');
+*/
 });
 	
   console.log('Population completed');
