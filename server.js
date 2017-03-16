@@ -61,10 +61,7 @@ pool.connect(function(err, client,done) {
 	console.log(bussinessRuleType.length);
 	
 
-query.on('end', function() {
-                 console.log('close');
-                 // client.end(); -- not needed, client will return to the pool on drain
-                 });
+
 	
   
   var query=client.query("select sfdcbusinessrule.BusinessRuleExecute($1,$2)",[sfdcid,bussinessRuleType],function(err,result){
