@@ -3,6 +3,7 @@ var app=express();
 var sleep = require('sleep');
 var bodyParser = require('body-parser');
 var pgp = require('pg-promise')();
+//var async = require("async");
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -44,8 +45,8 @@ app.get("/", function(req, res){
 app.post("/", function(req, res){
 pool.connect(function(err,client,done) {
   if (err){
-  //console.log(err);
-  throw err;
+  console.log(err);
+  //throw err;
   }
   console.log('Connected to postgres! Getting schemas...');
   //var param=req.params.id;
@@ -67,7 +68,7 @@ pool.connect(function(err,client,done) {
   var query=client.query("select sfdcbusinessrule.BusinessRuleExecute($1,$2)",[sfdcid,bussinessRuleType],function(err,result){
 	  	
 			done(); 
-	   pool.end();
+	   //pool.end();
 	  res.status(200).send('Connection Closed');
            if(err){
                console.log(err);
@@ -78,12 +79,17 @@ pool.connect(function(err,client,done) {
 	  
   	});
 	
-	/*client.query("select sfdcbusinessrule.BusinessRuleExecute($1,$2)",[sfdcid,bussinessRuleType]);
-	done(); 
-	   //pool.end();
+});	
+/*	client.query("select sfdcbusinessrule.BusinessRuleExecute($1,$2)",[sfdcid,bussinessRuleType]);
+	//done(); 
+	   pool.end();
 	  res.status(200).send('Connection Terminated');
-*/
+	
 });
+pool.on('error', function (err, client) {
+  res.status(200).send('Error Occured');
+});
+*/
 	
   console.log('Population completed');
 });	
