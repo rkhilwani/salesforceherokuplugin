@@ -42,7 +42,7 @@ app.get("/", function(req, res){
 });
 */
 app.post("/", function(req, res){
-pool.connect(function(err, client,done) {
+pool.connect(function(err,client,done) {
   if (err){
   //console.log(err);
   throw err;
@@ -64,7 +64,7 @@ pool.connect(function(err, client,done) {
 
 	
   
-  var query=client.query("select sfdcbusinessrule.BusinessRuleExecute($1,$2)",[sfdcid,bussinessRuleType],function(err,result){
+  /*var query=client.query("select sfdcbusinessrule.BusinessRuleExecute($1,$2)",[sfdcid,bussinessRuleType],function(err,result){
 	  	
 			done(); 
 	   pool.end();
@@ -77,7 +77,11 @@ pool.connect(function(err, client,done) {
            //res.status(200).send(result.rows);
 	  
   	});
-	
+*/	
+	client.query("select sfdcbusinessrule.BusinessRuleExecute($1,$2)",[sfdcid,bussinessRuleType]);
+	done(); 
+	   pool.end();
+	  res.status(200).send('Connection Closed');
 });
 	
   console.log('Population completed');
