@@ -71,14 +71,11 @@ pool.connect(function(err, client,done) {
                console.log(err);
                res.status(400).send(err);
            }
-	  client.end();
+	  pool.end();
            //res.status(200).send(result.rows);
 	  
   	});
-	query.on('end', function() {
-                 console.log('close');
-                  client.end(); 
-                 });
+	
 });
 	
   console.log('Population completed');
