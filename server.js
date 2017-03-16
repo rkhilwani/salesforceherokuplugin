@@ -45,8 +45,8 @@ app.get("/", function(req, res){
 app.post("/", function(req, res){
 pool.connect(function(err,client,done) {
   if (err){
-  console.log(err);
-  //throw err;
+  //console.log(err);
+  throw err;
   }
   console.log('Connected to postgres! Getting schemas...');
   //var param=req.params.id;
@@ -69,7 +69,7 @@ pool.connect(function(err,client,done) {
 	  	
 			done(); 
 	   //pool.end();
-	  res.status(200).send('Connection Closed');
+	  //res.status(200).send('Connection Closed');
            if(err){
                console.log(err);
                res.status(400).send(err);
