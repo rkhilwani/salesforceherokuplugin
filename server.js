@@ -68,6 +68,7 @@ pool.connect(function(err, client,done) {
 	  	
 			done(); 
 	   pool.end();
+	  res.status(200).send('Connection Closed');
            if(err){
                console.log(err);
                res.status(400).send(err);
