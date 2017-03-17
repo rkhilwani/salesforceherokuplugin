@@ -43,7 +43,7 @@ app.get("/", function(req, res){
 });
 */
 app.post("/", function(req, res){
-pool.connect(function(err,client,done) {
+pool.connect(process.env.DATABASE_URL,function(err,client,done) {
  /* if (err){
   //console.log(err);
   throw err;
