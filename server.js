@@ -7,7 +7,7 @@ var pgp = require('pg-promise')();
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const url = require('url');
+const url = require('url')
 const params = url.parse(process.env.DATABASE_URL);
 const auth = params.auth.split(':');
 
