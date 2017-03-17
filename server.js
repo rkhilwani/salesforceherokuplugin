@@ -8,6 +8,7 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 
 var url = require('url');
+console.log(process.env.DATABASE_URL);
 var params = url.parse(process.env.DATABASE_URL);
 var auth = params.auth.split(':');
 
