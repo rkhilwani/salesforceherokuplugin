@@ -7,13 +7,26 @@ var pgp = require('pg-promise')();
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const url = require('url');
+const params = url.parse(process.env.DATABASE_URL);
+const auth = params.auth.split(':');
+
+const config = {
+  user: auth[0],
+  password: auth[1],
+  host: params.hostname,
+  port: params.port,
+  database: params.pathname.split('/')[1],
+  ssl: true
+};
+
 var pg = require('pg');
 app.set('port', (process.env.PORT || 5000));
 pg.defaults.ssl = true;
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
-var config = {
+/*var config = {
   user: 'byemztchoixznv', //env var: PGUSER
   database: 'd6qh8k2rck35v8', //env var: PGDATABASE
   password: '35b5fd10b572744d4018dfc72c1856ba9a2118d5233bd7d521e4231ff7aea9bf', //env var: PGPASSWORD
@@ -22,6 +35,7 @@ var config = {
   max: 10, // max number of clients in the pool
  // idleTimeoutMillis: 100000, // how long a client is allowed to remain idle before being closed
 };
+*/
 //var pool1 = pgp('postgres://oprvfmfrktmuim:9db871afbdbf2f8bd1339d53de02359022e7ef5fb58392230d3a99cf32b63d48@ec2-54-204-32-145.compute-1.amazonaws.com:5432/d4q2qo2gph5otk');
 //var pool1=pgp(config);
 var pool = new pg.Pool(config);
