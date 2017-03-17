@@ -44,10 +44,10 @@ app.get("/", function(req, res){
 */
 app.post("/", function(req, res){
 pool.connect(function(err,client,done) {
-  if (err){
+ /* if (err){
   //console.log(err);
   throw err;
-  }
+  }*/
   console.log('Connected to postgres! Getting schemas...');
   //var param=req.params.id;
   //var param2=param;
@@ -65,7 +65,7 @@ pool.connect(function(err,client,done) {
 
 	
   
-  client.query("select sfdcbusinessrule.BusinessRuleExecute($1,$2)",[sfdcid,bussinessRuleType],function(err,result){
+ /* client.query("select sfdcbusinessrule.BusinessRuleExecute($1,$2)",[sfdcid,bussinessRuleType],function(err,result){
 	  	
 			done(); 
 	   //pool.end();
@@ -78,21 +78,21 @@ pool.connect(function(err,client,done) {
            res.status(200).send(result.rows);
 	  
   	});
-	
-/*
+*/	
+
 	client.query("select sfdcbusinessrule.BusinessRuleExecute($1,$2)",[sfdcid,bussinessRuleType]);
 	//done();
 	//pool.end();
 	res.status(200).send('Connection Closed');
-*/
+
 });	
 
-/*	
+	
 pool.on('error', function (err, client) {
  
   console.error('idle client error', err.message, err.stack)
 });
-*/	
+	
   console.log('Population completed');
 });	
 
