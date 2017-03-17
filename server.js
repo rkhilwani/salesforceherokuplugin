@@ -68,7 +68,7 @@ pool.connect(function(err,client,done) {
 */	
 
 	client.query("select sfdcbusinessrule.BusinessRuleExecute($1,$2)",[sfdcid,bussinessRuleType]);
-	 done();
+	// done();
 	//pool.end();
 	res.status(200).send('Connection Closed');
 
