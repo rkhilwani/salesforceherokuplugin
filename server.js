@@ -43,7 +43,7 @@ app.get("/", function(req, res){
 });
 */
 app.post("/", function(req, res){
-pool.connect(process.env.DATABASE_URL,function(err,client,done) {
+pg.connect(process.env.DATABASE_URL,function(err,client,done) {
  /* if (err){
   //console.log(err);
   throw err;
@@ -88,7 +88,7 @@ pool.connect(process.env.DATABASE_URL,function(err,client,done) {
 });	
 
 	
-pool.on('error', function (err, client) {
+pg.on('error', function (err, client) {
  
   console.error('idle client error', err.message, err.stack)
 });
