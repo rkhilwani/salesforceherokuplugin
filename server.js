@@ -72,6 +72,7 @@ pool.connect(function(err,client,done) {
 	
 	res.status(200).send('Connection Closed');
     pool.end();
+    console.log('Pool disconnected');
 });	
 
 	
