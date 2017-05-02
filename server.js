@@ -71,7 +71,7 @@ pool.connect(function(err,client,done) {
 	// done();
 	
 	res.status(200).send('Connection Closed');
-	pool.end();
+    pool.end();
 });	
 
 	
