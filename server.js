@@ -13,182 +13,92 @@ var params = url.parse(process.env.DATABASE_URL);
 var auth = params.auth.split(':');
 
 var config = {
-  user: auth[0],
-  password: auth[1],
-  host: params.hostname,
-  port: params.port,
-  database: params.pathname.split('/')[1],
-  ssl: true
+    user: auth[0],
+    password: auth[1],
+    host: params.hostname,
+    port: params.port,
+    database: params.pathname.split('/')[1],
+    ssl: true
 };
 
 var pg = require('pg');
 app.set('port', (process.env.PORT || 5000));
 pg.defaults.ssl = true;
 app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
+    console.log('Node app is running on port', app.get('port'));
 });
 var pool = new pg.Pool(config);
 
+//Call post method to create a preview or populate request.
 app.post("/", function(req, res){
-pool.connect(function(err,client,done) {
- /* if (err){
-  //console.log(err);
-  throw err;
-  }*/
-  	console.log('Connected to postgres! Getting schemas...');
-  //var param=req.params.id;
-  //var param2=param;
-  //var text;
-  	console.log(req.body);
-  	var sfdcid=req.body.Business_Rule_Change_request_sfid;
-  	var bussinessRuleType=req.body.bussinessRuleType;
- // console.log(req.body.tempobj);
-	console.log(sfdcid);
-	console.log(sfdcid.length);
-	console.log(bussinessRuleType);
-	console.log(bussinessRuleType.length);
-	
+    pool.connect(function(err,client,done) {
+        //Checking if there is a connection error
+        if(err) {
+            return console.error('error fetching client from pool', err);
+        }
 
+        console.log('Connected to postgres! Getting schemas...');
+        console.log(req.body);
 
-	
-  
- /* client.query("select sfdcbusinessrule.BusinessRuleExecute($1,$2)",[sfdcid,bussinessRuleType],function(err,result){
-	  	
-			done(); 
-	   //pool.end();
-	  //res.status(200).send('Connection Closed');
-           if(err){
-               console.log(err);
-               res.status(400).send(err);
-           }
-	 
-           res.status(200).send(result.rows);
-	  
-  	});
-*/	
+        //Get data from request
+        var sfdcid=req.body.Business_Rule_Change_request_sfid;
+        var bussinessRuleType=req.body.bussinessRuleType;
 
-	client.query("select sfdcbusinessrule.BusinessRuleExecute($1,$2)",[sfdcid,bussinessRuleType]);
-	// done();
-	
-	res.status(200).send('Connection Closed');
-    pool.end();
-    console.log('Pool disconnected');
-});	
+        console.log(sfdcid);
+        console.log(sfdcid.length);
+        console.log(bussinessRuleType);
+        console.log(bussinessRuleType.length);
 
-	
-pool.on('error', function (err, client) {
- 
-  console.error('idle client error', err.message, err.stack)
+        //Query postgerss to execute rule and generate data.
+        client.query("select sfdcbusinessrule.BusinessRuleExecute($1,$2)",[sfdcid,bussinessRuleType]);
+
+        //call `done(err)` to release the client back to the pool (or destroy it if there is an error) 
+        done(err);
+
+        if(err) {
+            return console.error('error running query', err);
+        }
+
+        res.status(200).send('Connection Closed');
+    });
+
+    pool.on('error', function (err, client) { 
+      console.error('idle client error', err.message, err.stack)
+    });
+
+    console.log('Population completed');
 });
-	
-  console.log('Population completed');
-});	
 
 //Method For deletion Starts Here
-
 app.post("/delete", function(req, res){
-pool.connect(function(err, client,done) {
-  if (err){
-  //console.log(err);
-  throw err;
-  }
-  console.log('Connected to postgres! Getting schemas...');
-  //var param=req.params.id;
-  //var param2=param;
-  //var text;
-  console.log(req.body);
-  var sfdcid=req.body.Business_Rule_Change_request_sfid;
-  var bussinessRuleType=req.body.bussinessRuleType;
- // console.log(req.body.tempobj);
-	console.log(sfdcid);
-	console.log(sfdcid.length);
-	console.log(bussinessRuleType);
-	console.log(bussinessRuleType.length);
-	
+    pool.connect(function(err, client,done) {
+        //Checking if there is a connection error
+        if(err) {
+            return console.error('error fetching client from pool', err);
+        }
 
+        console.log('Connected to postgres! Getting schemas...');
+        console.log(req.body);
 
-	
-  
-  client.query("select sfdcbusinessrule.delete_businessruleexecute($1,$2)",[sfdcid,bussinessRuleType],function(err,result){
-	  
-			done(); 
-           if(err){
-               console.log(err);
-               res.status(400).send(err);
-           }
-           res.status(200).send(result.rows);
-	  
-  });	
-	
-	});
-	
-  console.log('Population completed');
-});	
-	
+        var sfdcid=req.body.Business_Rule_Change_request_sfid;
+        var bussinessRuleType=req.body.bussinessRuleType;
+     
+        console.log(sfdcid);
+        console.log(sfdcid.length);
+        console.log(bussinessRuleType);
+        console.log(bussinessRuleType.length);
 
+        client.query("select sfdcbusinessrule.delete_businessruleexecute($1,$2)",[sfdcid,bussinessRuleType],function(err,result){
+        
+        //call `done(err)` to release the client back to the pool (or destroy it if there is an error) 
+        done(err);
+        if(err){
+           console.log(err);
+           return console.error('error running query', err);
+        }
+        res.status(200).send(result.rows);
+      })
 
-
-
-//res.write('Population Completed');
-	//send image
-	//res.end();
-	//var resp = client.query("SELECT Name from salesforceorg2.AxtriaSalesIQTM__Team_Instance_Account__c where AxtriaSalesIQTM__Team_Instance__c =$1 limit 1",[param]);
-		//resp.on('row',function(row){
-			//for(var i = 0; i &lt; ret.rows.length(); i++) 
-		//res.write(JSON.stringify(ret.rows[i]));
-		//res.end();
-		//res.json(ret);
-	//	res.send(JSON.stringify(row));
-		
-		
-	
-/*app.post("/:id", function(req, res){
-pool.connect(function(err, client) {
-  if (err){
-  console.log(err);
-  throw err;
-  }
-  console.log('Connected to postgres! Getting schemas...');
-  var param=req.params.id;
-  var teaminsta=req.body.teaminst;
-  var finalparam=String(param);
-	console.log(param);
-	console.log(teaminsta);
-  //res.send('Population Completed');
-	pool1.func('salesforceorg2.Team_Instance_Account_PopulateV3',abc)
-	.then(function (data) {
-        console.log(data);
-			res.send('Population Completed');// print result data;
-    })
-    .catch(function (error) {
-        console.log(error); // print error;
     });
-	//pool1.func('SELECT Name from salesforceorg2.AxtriaSalesIQTM__Team_Instance_Account__c where AxtriaSalesIQTM__Team_Instance__c =$1 limit 1', [param])
-    //.then(function (data) {
-      //  res.send(data);
-    //})
-    //.catch(function (error) {
-        // error;
-    //});
-	
-  console.log('Population completed');
+    console.log('Deletion Completed');
 });
-});
-*/
-/*
-app.get("/", function(req, res){
-	pool.connect(function(err, client) {
-	if (err) throw err;
-	console.log('Connected to postgres! Getting schemas...');
-
-  
-  client
-    .query('SELECT AxtriaSalesIQTM__Client_Position_Code__c FROM salesforceorg2.AxtriaSalesIQTM__Position__c limit 1;')
-    .on('row', function(row) {
-      console.log(JSON.stringify(row));
-	  res.json(row);
-    });
-  console.log('nishant');
-});
-});
-*/
