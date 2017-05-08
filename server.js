@@ -53,7 +53,7 @@ app.post("/", function(req, res){
         client.query("select sfdcbusinessrule.BusinessRuleExecute($1,$2)",[sfdcid,bussinessRuleType]);
 
         //call `done(err)` to release the client back to the pool (or destroy it if there is an error) 
-        done(err);
+        //done(err);
 
         if(err) {
             return console.error('error running query', err);
